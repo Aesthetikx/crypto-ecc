@@ -14,7 +14,36 @@ Zp Zp::inverse() const{
 
 ECpoint ECpoint::operator + (const ECpoint &a) const {
         // Implement  elliptic curve addition
-        return 0x0;
+        ECpoint p = *this;
+        ECpoint q = a;
+        ECpoint r = new ECpoint();
+
+        if (p.infinityPoint)
+        {
+                return q;
+        }
+        else if (q.infinityPoint)
+        {
+                return p;
+        }
+
+        if (!(p == q) && !(p.x == q.x))
+        {
+                Zp delta = (q.y - p.y) * ((q.x - p.x).inverse());
+                r.x = delta * delta - p.x - q.x;
+                r.y = delta * (p.x - r.x) - p.y;
+        }
+        else if ((p == q) && !(p.y * 2 == 0))
+        {
+                Zp delta = (p.x * p.x * 3 - A) * ((p.y * 2).inverse());
+                r.x = delta * delta - (p.x * 2);
+                r.y = delta * (p.x - r.x) - p.y;
+        }
+        else
+        {
+                r.infinityPoint = true;
+        }
+        return r;
 }
 
 

@@ -8,20 +8,24 @@ using namespace std;
 
 Zp Zp::inverse() const{
         // Implement the Extended Euclidean Algorithm to return the inverse mod PRIME
+        return 0x0;
 }
 
 
 ECpoint ECpoint::operator + (const ECpoint &a) const {
         // Implement  elliptic curve addition
+        return 0x0;
 }
 
 
 ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
         //Find the sum of p+p+...+p (vtimes)
+        return 0x0;
 }
 
 Zp ECsystem::power(Zp val, mpz_class pow) {
         //Find the sum of val*val+...+val (pow times)
+        return 0x0;
 }
 
 
@@ -48,17 +52,20 @@ mpz_class ECsystem::pointCompress(ECpoint e) {
 
 ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
         //Implement the delta function for decompressing the compressed point
+        return 0x0;
 }
 
 
 pair<mpz_class, mpz_class> ECsystem::encrypt(ECpoint publicKey, mpz_class privateKey,mpz_class plaintext){
         // You must implement elliptic curve encryption
         //  Do not generate a random key. Use the private key that is passed from the main function
+        return make_pair(0x0, 0x0);
 }
 
 
 mpz_class ECsystem::decrypt(pair<mpz_class, mpz_class> ciphertext){
         // Implement EC Decryption
+        return 0x0;
 }
 
 

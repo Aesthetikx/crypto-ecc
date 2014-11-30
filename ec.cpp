@@ -20,7 +20,12 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
 
 ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
         //Find the sum of p+p+...+p (vtimes)
-        return 0x0;
+        ECpoint sum = p;
+        while (--v > 0)
+        {
+                sum = sum + p;
+        }
+        return sum;
 }
 
 Zp ECsystem::power(Zp val, mpz_class pow) {

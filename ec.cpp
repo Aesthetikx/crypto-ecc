@@ -157,7 +157,11 @@ pair<mpz_class, mpz_class> ECsystem::encrypt(ECpoint publicKey, mpz_class privat
 
 mpz_class ECsystem::decrypt(pair<mpz_class, mpz_class> ciphertext){
         // Implement EC Decryption
-        return 0x0;
+        mpz_class c1 = ciphertext.first;
+        mpz_class c2 = ciphertext.second;
+        ECpoint r = pointDecompress(c1) * privateKey;
+        mpz_class message = c2 ^ pointCompress(r);
+        return message;
 }
 
 

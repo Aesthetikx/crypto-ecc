@@ -124,7 +124,23 @@ mpz_class ECsystem::pointCompress(ECpoint e) {
 
 ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
         //Implement the delta function for decompressing the compressed point
-        return 0x0;
+        mpz_class br = compressedPoint & 1;
+
+        Zp x(compressedPoint >> 1);
+
+        Zp z = Zp(power(x, 3).getValue() + A * x.getValue() + B);
+
+        Zp first_root = power(z, (PRIME + 1) / 4);
+
+        if ((first_root.getValue() & br) == 1)
+        {
+                return ECpoint(x, first_root);
+        }
+        else
+        {
+                Zp second_root(PRIME - first_root.getValue());
+                return ECpoint(x, second_root);
+        }
 }
 
 

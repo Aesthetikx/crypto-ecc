@@ -7,8 +7,33 @@
 using namespace std;
 
 Zp Zp::inverse() const{
-        // Implement the Extended Euclidean Algorithm to return the inverse mod PRIME
-        return 0x0;
+        mpz_class a = this->value;
+        mpz_class n = PRIME;
+
+        mpz_class t = 0;
+        mpz_class new_t = 1;
+        mpz_class r = n;
+        mpz_class new_r = a;
+
+        while (new_r != 0)
+        {
+                mpz_class quotient = r / new_r;
+
+                mpz_class tmp_t = t;
+                t = new_t;
+                new_t = tmp_t - quotient * new_t;
+
+                mpz_class tmp_r = r;
+                r = new_r;
+                new_r = tmp_r - quotient * new_r;
+        }
+
+        if (t < 0)
+        {
+                t = t + n;
+        }
+
+        return Zp(t);
 }
 
 

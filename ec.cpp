@@ -84,7 +84,20 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
 
 Zp ECsystem::power(Zp val, mpz_class pow) {
         //Find the sum of val*val+...+val (pow times)
-        return 0x0;
+        Zp ret(1);
+
+        while (pow != 0)
+        {
+                if (pow % 2 == 1)
+                {
+                        ret = ret * val;
+                        --pow;
+                }
+                val = val * val;
+                pow = pow / 2;
+        }
+
+        return ret;
 }
 
 

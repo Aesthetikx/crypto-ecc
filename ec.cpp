@@ -74,30 +74,44 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
 
 ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
         //Find the sum of p+p+...+p (vtimes)
-        ECpoint sum = p;
-        while (--v > 0)
+        if (v == 0)
         {
-                sum = sum + p;
+                return 0;
         }
-        return sum;
+        else if (v == 1)
+        {
+                return p;
+        }
+
+        if (v % 2 == 1)
+        {
+                return p + repeatSum(p + p, v / 2);
+        }
+        else
+        {
+                return repeatSum(p + p, v / 2);
+        }
 }
 
 Zp ECsystem::power(Zp val, mpz_class pow) {
         //Find the sum of val*val+...+val (pow times)
-        Zp ret(1);
-
-        while (pow != 0)
+        if (pow == 0)
         {
-                if (pow % 2 == 1)
-                {
-                        ret = ret * val;
-                        --pow;
-                }
-                val = val * val;
-                pow = pow / 2;
+                return 1;
+        }
+        else if (pow == 1)
+        {
+                return val;
         }
 
-        return ret;
+        if (pow % 2 == 1)
+        {
+                return val * power(val * val, pow / 2);
+        }
+        else
+        {
+                return power(val * val, pow / 2);
+        }
 }
 
 

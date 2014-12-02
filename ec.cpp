@@ -147,7 +147,11 @@ ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
 pair<mpz_class, mpz_class> ECsystem::encrypt(ECpoint publicKey, mpz_class privateKey,mpz_class plaintext){
         // You must implement elliptic curve encryption
         //  Do not generate a random key. Use the private key that is passed from the main function
-        return make_pair(0x0, 0x0);
+        ECpoint q = G * privateKey;
+        ECpoint r = publicKey * privateKey;
+        mpz_class c1 = pointCompress(q);
+        mpz_class c2 = plaintext ^ pointCompress(r);
+        return make_pair(c1, c2);
 }
 
 
